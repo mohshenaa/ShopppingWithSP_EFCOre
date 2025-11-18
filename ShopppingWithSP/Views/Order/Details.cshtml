@@ -1,0 +1,123 @@
+﻿@model ShopppingWithSP.Models.Order
+
+@{
+	ViewData["Title"] = "Order Details";
+}
+
+<div class="container ">
+	<h2>Order Details</h2>
+
+	<div class="card table-primary">
+		<div class="card-header">
+			<h4>Order #@Model.OrderId</h4>
+		</div>
+		<div class="card-body">
+			<!-- Customer Information -->
+			<div class="row mb-4">
+				<div class="col-md-6">
+					<h5>Customer Information</h5>
+					<table class="table table-bordered">
+						<tr>
+							<th>Customer Name:</th>
+							<td>@Model.CustomerName</td>
+						</tr>
+						<tr>
+							<th>Contact Number:</th>
+							<td>@Model.CustomerContact</td>
+						</tr>
+						<tr>
+							<th>Email:</th>
+							<td>@Model.CustomerEmail</td>
+						</tr>
+						<tr>
+							<th>Shipping Address:</th>
+							<td>@Model.CustomerAddress</td>
+						</tr>
+					</table>
+				</div>
+
+				<div class="col-md-6">
+					<h5>Order Information</h5>
+					<table class="table table-bordered">
+						<tr>
+							<th>Order Date:</th>
+							<td>@Model.OrderDate.ToString("MMM dd, yyyy hh:mm tt")</td>
+						</tr>
+						<tr>
+							<th>Order Status:</th>
+							<td>
+								<span class="badge
+                                    @(Model.OrderStatus == Status.Delivered ? "bg-success" : Model.OrderStatus == Status.Confirm ? "bg-primary" : "bg-warning")">
+									@Model.OrderStatus
+								</span>
+							</td>
+
+						</tr>
+						<tr>
+							<th>Total Items:</th>
+							<td>@Model.Details.Count</td>
+						</tr>
+						<tr>
+							<th>Total Amount:</th>
+							<td class="fw-bold">@Model.Details.Sum(od => od.Price).ToString("C")</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<!-- Order Items -->
+			<h5>Order Items</h5>
+			@if (Model.Details.Any())
+			{
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<thead class="table-dark">
+							<tr>
+								<th>Item</th>
+								<th>Size</th>
+								<th>Price</th>
+								<th>Description</th>
+								<th>Image</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var item in Model.Details)
+							{
+								<tr>
+									<td>@item.Item</td>
+									<td>@item.Size</td>
+									<td>@item.Price.ToString("C")</td>
+									<td>@item.Description</td>
+									<td>
+										@if (!string.IsNullOrEmpty(item.ImageUrl))
+										{
+											<div class="image-container">
+												<img src="@item.ImageUrl" alt="@item.Item" class="img-thumbnail" style="max-width: 150px; max-height: 150px;" />
+											</div>
+										}
+										else
+										{
+											<span class="text-muted">No Image Available</span>
+										}
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+			}
+			else
+			{
+				<div class="alert alert-info">
+					No items found in this order.
+				</div>
+			}
+
+			<div class="mt-4">
+				<a asp-action="Edit" asp-route-id="@Model.OrderId" class="btn btn-info">Edit</a>
+				<a asp-action="Delete" asp-route-id="@Model.OrderId" class="btn btn-warning">Delete</a>
+				<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+			</div>
+		</div>
+	</div>
+</div>

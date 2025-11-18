@@ -1,0 +1,58 @@
+﻿@model ShopppingWithSP.Models.Order
+
+@{
+    ViewData["Title"] = "Edit Order";
+}
+
+<h2>Edit Order</h2>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="OrderId" />
+
+    <div class="row">
+    
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="CustomerName" class="fw-bold "></label>
+                <input asp-for="CustomerName" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CustomerContact" class="fw-bold "></label>
+                <input asp-for="CustomerContact" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CustomerEmail" class="fw-bold "></label>
+                <input asp-for="CustomerEmail" class="form-control" />
+            </div>
+        </div>
+
+       
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="CustomerAddress" class="fw-bold "></label>
+                <textarea asp-for="CustomerAddress" rows="1" class="form-control"></textarea>
+              
+            </div>
+
+            <div class="form-group">
+                <label asp-for="OrderStatus" class="control-label fw-bold"></label>
+                <select asp-for="OrderStatus" class="form-control"
+                        asp-items="Html.GetEnumSelectList<Status>()"></select>
+                <span asp-validation-for="OrderStatus" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group ">
+                <button type="submit" value="update" class="btn btn-warning">Update Order</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+            </div>
+        </div>
+    </div>
+
+  
+    <div>
+        <partial name="_Partial" model="@Model"></partial>
+    </div>
+    
+</form>

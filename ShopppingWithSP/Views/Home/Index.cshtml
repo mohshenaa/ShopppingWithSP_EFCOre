@@ -1,0 +1,91 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container-fluid px-0">
+    <!-- Hero Section -->
+    <div class="bg-primary text-white py-5">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Welcome to Shopping App</h1>
+            <p class="lead mb-4">Your one-stop solution for all shopping needs</p>
+            <a href="/Order" class="btn btn-light btn-lg me-3">Manage Orders</a>
+            <a href="/Order/Create" class="btn btn-outline-light btn-lg">Create New Order</a>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="container py-5">
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body">
+                        <i class="bi bi-cart-check display-4 text-primary mb-3"></i>
+                        <h3>Order Management</h3>
+                        <p>Easily create, edit, and track all your orders in one place</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body">
+                        <i class="bi bi-people display-4 text-success mb-3"></i>
+                        <h3>Customer Focus</h3>
+                        <p>Manage customer information and order history efficiently</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body">
+                        <i class="bi bi-graph-up display-4 text-info mb-3"></i>
+                        <h3>Real-time Tracking</h3>
+                        <p>Monitor order status and updates in real-time</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="bg-light py-4">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-3">
+                    <h4 class="text-primary fw-bold">150+</h4>
+                    <p class="mb-0">Orders Processed</p>
+                </div>
+                <div class="col-md-3">
+                    <h4 class="text-success fw-bold">50+</h4>
+                    <p class="mb-0">Happy Customers</p>
+                </div>
+                <div class="col-md-3">
+                    <h4 class="text-info fw-bold">99%</h4>
+                    <p class="mb-0">Success Rate</p>
+                </div>
+                <div class="col-md-3">
+                    <h4 class="text-warning fw-bold">24/7</h4>
+                    <p class="mb-0">Support Available</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container py-5 text-center">
+        <h2 class="mb-4">Ready to Get Started?</h2>
+        <p class="lead mb-4">Join thousands of satisfied customers managing their orders with our platform</p>
+        <a href="/Order/Create" class="btn btn-primary btn-lg">Create Your First Order</a>
+    </div>
+</div>
+
+
+
+<style>
+    .card {
+        transition: transform 0.3s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+</style>

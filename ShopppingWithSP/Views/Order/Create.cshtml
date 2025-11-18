@@ -1,0 +1,68 @@
+﻿@model ShopppingWithSP.Models.Order
+
+@{
+    ViewData["Title"] = "Create Order";
+}
+
+<h2 style="text-align:center">Create an Order</h2>
+<hr />
+<h3>Customer</h3>
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="validation-summary">
+            <div asp-validation-summary="All"></div>
+        </div> 
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="CustomerName"></label>
+                <input asp-for="CustomerName" class="form-control" />
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CustomerContact"></label>
+                <input asp-for="CustomerContact" class="form-control" />
+                <span asp-validation-for="CustomerContact" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CustomerEmail"></label>
+                <input asp-for="CustomerEmail" class="form-control" />
+                <span asp-validation-for="CustomerEmail" class="text-danger"></span>
+            </div>
+        </div>
+
+     
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="CustomerAddress"></label>
+                <textarea asp-for="CustomerAddress" rows="1" class="form-control"></textarea>
+                <span asp-validation-for="CustomerAddress" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="OrderStatus" class="control-label"></label>
+                <select asp-for="OrderStatus" class="form-control"
+                        asp-items="Html.GetEnumSelectList<Status>()"></select>
+                <span asp-validation-for="OrderStatus" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+
+                <button type="submit" class="btn btn-warning">Save Order</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+            </div>
+        </div>
+    </div>
+    <hr />
+<div>
+    <partial name="_Partial" model="@Model"></partial>
+</div>
+   
+
+</form>
+@section Scripts{
+@{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

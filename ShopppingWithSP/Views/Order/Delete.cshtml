@@ -1,0 +1,46 @@
+﻿@model ShopppingWithSP.Models.Order
+
+<h2 class="text-dark text-center mb-4">Delete Order</h2>
+
+<div class="card border-primary">
+    <div class="card-header  text-dark">
+        <h3 class="mb-0 ">Order @Model.OrderId</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+        
+            <div class="col-md-6">
+                <h5 class="text-primary">Customer Information</h5>
+                <p><strong>Name:</strong> @Model.CustomerName</p>
+                <p><strong>Contact:</strong> @Model.CustomerContact</p>
+                <p><strong>Email:</strong> @Model.CustomerEmail</p>
+                <p><strong>Address:</strong> @Model.CustomerAddress</p>
+                <p><strong>Status:</strong> <span class="badge bg-info">@Model.OrderStatus</span></p>
+            </div>
+
+            <!-- Order Items - Right Side -->
+            <div class="col-md-6">
+                <h5 class="text-primary">Order Items</h5>
+                <ul class="list-group">
+                    @foreach (var item in Model.Details)
+                    {
+                        <li class="list-group-item">@item.Item - @item.Size - @item.Price</li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div class="alert alert-info mt-4">
+            <strong>Note:</strong> This action cannot be undone.
+            <form asp-action="Delete" method="post">
+                <input type="hidden" asp-for="OrderId" />
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-warning">Delete</button>
+                    <a asp-action="Index" class="btn btn-outline-primary">Cancel</a>
+                </div>
+            </form>
+        </div>
+
+       
+    </div>
+</div>

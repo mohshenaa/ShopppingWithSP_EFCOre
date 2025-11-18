@@ -1,0 +1,89 @@
+﻿@model IEnumerable<ShopppingWithSP.Models.Order>
+
+@{
+    ViewData["Title"] = "All Orders";
+}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="flex-grow-1 text-center">
+        <h2 class="mb-0">All Orders</h2>
+    </div>
+    <div>
+        <a class="btn btn-outline-dark" asp-action="Create">Add New Order</a>
+        @if (!string.IsNullOrEmpty(TempData["Success"]?.ToString()))
+        {
+            <span class="alert alert-success d-inline-block p-2 ms-2 mb-0">@TempData["Success"]</span>
+        }
+    </div>
+</div>
+
+<table class="table table-bordered table-striped table-hover  ">
+    <thead class="table-dark">
+        <tr style="text-align:center">
+            <th>Order Id</th>
+            <th>Customer</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Status</th>
+            <th>Order Date</th>
+            <th>Order info</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody class="table-primary">
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.OrderId</td>
+                <td>@order.CustomerName</td>
+                <td>@order.CustomerContact</td>
+                <td>@order.CustomerEmail</td>
+                <td>@order.CustomerAddress</td>
+               @*  <td>@order.OrderStatus</td> *@
+
+               @*  <td>
+                    <select asp-for="@order.OrderStatus" class="form-control"
+                            asp-items="Html.GetEnumSelectList<Status>()"></select>
+                </td> *@
+
+                <td>
+                    <form method="post" asp-action="Index" class="d-inline">
+                        <input type="hidden" name="orderId" value="@order.OrderId" />
+                        <select name="status" class="form-control" onchange="this.form.submit()">
+                            @foreach (var status in Enum.GetValues<Status>())
+                            {
+                                <option value="@status" selected="@(status == order.OrderStatus)">@status</option>
+                            }
+                        </select>
+                    </form>
+                </td>
+                <td>@order.OrderDate.ToString("yyyy-MM-dd")</td>
+                <td>
+                    <ul>
+                        @foreach (var item in order.Details)
+                        {
+                            <li>@item.Item - @item.Size </li>
+                        }
+                    </ul>
+                </td>
+
+        
+
+              
+                <td>
+                    <div class="d-flex gap-1">
+                        <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@order.OrderId">
+                            <i class="bi bi-pencil me-1"></i>  <span>Edit</span>
+                        </a>
+                        <a class="btn btn-sm btn-info text-white" asp-action="Details" asp-route-id="@order.OrderId">
+                            <i class="bi bi-eye me-1"></i>Details
+                        </a>
+                        <a class="btn btn-sm btn-secondary" asp-action="Delete" asp-route-id="@order.OrderId">
+                            <i class="bi bi-trash me-1"></i>Delete
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

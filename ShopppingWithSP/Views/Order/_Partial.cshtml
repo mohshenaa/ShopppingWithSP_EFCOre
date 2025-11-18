@@ -1,0 +1,51 @@
+﻿@model Order
+
+
+<h4>Order Items</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Size</th>
+            <th>Price</th>
+            <th>Photo</th>
+            <th>Description</th>
+            <th>
+                <button type="submit" name="operation" value="AddItem" class="btn btn-info">Add </button>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Details != null)
+        {
+            for (int i = 0; i < Model.Details.Count; i++)
+            {
+                <tr>
+                    <td><input asp-for="@Model.Details[i].Item" class="form-control" /></td>
+                    <td><input asp-for="@Model.Details[i].Size" class="form-control" /></td>
+                    <td><input asp-for="@Model.Details[i].Price" class="form-control" /></td>
+                   @*  <td><input type="file" asp-for="@Model.Details[i].ImageFile" class="form-control" /></td> *@
+                    <td>
+
+                        @if (!string.IsNullOrEmpty(Model.Details[i].ImageUrl))
+                        {
+                            <div class="mb-2">
+                                <img src="@Model.Details[i].ImageUrl" alt="Current image"
+                                     style="max-height: 100px; max-width: 100px;" class="img-thumbnail" />
+                                <input type="hidden" asp-for="Details[i].ImageUrl" />
+                                <small class="form-text text-muted">Current image</small>
+                            </div>
+                        }
+
+                      
+                        <input type="file" asp-for="Details[i].ImageFile" class="form-control-file" />
+                    </td>
+                    <td><input asp-for="@Model.Details[i].Description" class="form-control" /></td>
+                    <td>
+                        <button type="submit" name="operation" value="DeleteItem-@i" class="btn btn-warning">Delete</button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
