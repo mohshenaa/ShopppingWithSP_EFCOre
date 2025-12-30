@@ -23,8 +23,8 @@ It is designed for learning how to integrate **Stored Procedures** with EF Core 
 
 | Technology | Version |
 |------------|---------|
-| ASP.NET Core | (your version here) |
-| Entity Framework Core | (your version here) |
+| ASP.NET Core | .Net08 |
+| Entity Framework Core | latest |
 | C# | .NET Language |
 | HTML / CSS / JS | Frontend UI |
 | SQL Server | Database |
